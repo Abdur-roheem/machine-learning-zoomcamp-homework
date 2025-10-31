@@ -1,5 +1,5 @@
 import pickle
-import requests
+# import requests
 import uvicorn
 
 from fastapi import FastAPI
