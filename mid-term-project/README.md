@@ -38,43 +38,37 @@ The solution is designed to support automated bank marketing decisions, enabling
 The project uses the Bank Marketing Dataset (bank-full.csv).
 
 **2. Files in the Repository**
-+  _.python-version_     # Python version specification for environment managers
-+ _Dockerfile_           # Docker image configuration for deployment
-+ _README.md_            # Project documentation (this file)
-+ _bank-full.csv_        # Dataset used for training and evaluation
-+ _bank-model.bin_       # Serialized DictVectorizer + trained ML model
-+ _notebook.ipynb_       # Full workflow: EDA, preprocessing, model testing, saving
-+ _predict.py_           # Script to load model.bin and predict for new customer data
-+ _predict_old.py_       # Earlier version of prediction script (kept for reference)
-+ _pyproject.toml_       # Project dependencies and build configuration
-+ _test.py_              # Basic test script to validate model loading/prediction
-+ _train.py_             # End-to-end training script for model construction
-+ _uv.lock_              # Lock file for deterministic package resolution
++  _.python-version_     ~ Python version specification for environment managers
++ _Dockerfile_           ~ Docker image configuration for deployment
++ _README.md_            ~ Project documentation (this file)
++ _bank-full.csv_        ~ Dataset used for training and evaluation
++ _bank-model.bin_       ~ Serialized DictVectorizer + trained ML model
++ _notebook.ipynb_       ~ Full workflow: EDA, preprocessing, model testing, saving
++ _predict.py_           ~ Script to load model.bin and predict for new customer data
++ _predict_old.py_       ~ Earlier version of prediction script (kept for reference)
++ _pyproject.toml_       ~ Project dependencies and build configuration
++ _test.py_              ~ Basic test script to validate model loading/prediction
++ _train.py_             ~ End-to-end training script for model construction
++ _uv.lock_              ~ Lock file for deterministic package resolution
 
 **4. How to Run the Project**
+
   A. Running Locally (Without Docker)
-        1. Clone the repository
-           + git clone https://github.comAbdur-roheem/machine-learning-zoomcamp-homework/edit/main/mid-term-project/prediction.git
-           + cd term-deposit-prediction
-
-        2. Install dependencies
-            - If you're using uv:
-            
-                `uv sync`
-                
-                Or using pip:
-
-                `pip install -r requirements.txt`
-
-_(If requirements.txt is not generated, dependencies are inside pyproject.toml.)_
-
-        3. Train the model (optional)
-
-            - This will regenerate bank-model.bin.
-
+    
+     1. Clone the repository
+     
+        + git clone https://github.comAbdur-roheem/machine-learning-zoomcamp-homework/edit/main/mid-term-project/prediction.git
+        + cd term-deposit-prediction
+     
+     2. Install dependencies        
+          `uv sync`
+     
+     3. Train the model (optional)
+       
+       - This will regenerate bank-model.bin.
               `python train.py`
 
-        4. Make a prediction
+     4. Make a prediction
             `python predict.py` --input '{"age": 35, "job": "technician", "balance": 1500, "loan": "no"}'
 
     B. Running via Docker
@@ -94,20 +88,12 @@ _(If requirements.txt is not generated, dependencies are inside pyproject.toml.)
 
 All data science steps are documented in notebook.ipynb, including:
 
-- Data collection and initial checks
-
-- Missing-value treatment
-
+- Data collection
 - Exploratory Data Analysis (EDA)
-
 - Feature preprocessing
-
-- Training multiple models (e.g., Logistic Regression, XGBoost)
-
-- Comparing performance using ROC AUC and other metrics
-
+- Training multiple models (Logistic Regression, XGBoost)
+- Comparing performance using ROC AUC
 - Selection of the best model
-
 - Saving the final model and DictVectorizer into bank-model.bin
 
 This ensures the notebook serves as a full methodological record suitable for academic review.
@@ -125,9 +111,3 @@ This ensures the notebook serves as a full methodological record suitable for ac
 > A lightweight prediction script for input scoring
 
 > Optional Docker container for consistent deployment
-
-This makes the system portable, reproducible, and ready for production.
-
-7. Author / Credits
-
-Project developed as part of an applied machine-learning workflow for predicting customer subscription behavior in banking marketing campaigns.
