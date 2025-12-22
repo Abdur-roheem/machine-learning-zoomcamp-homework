@@ -2,7 +2,8 @@
 
 ## **📌 Project Overview**
 
-This project builds a machine-learning model to predict whether a bank customer will subscribe to a term deposit.
+This project builds a machine-learning model to predict whether a bank customer will subscribe to a term deposit. The model is exposed as a REST API using FastAPI and deployed to the cloud using Docker and Hugging Face Spaces.
+
 **The pipeline includes:**
 
 > Data exploration & preprocessing
@@ -71,7 +72,7 @@ The project uses the Bank Marketing Dataset (bank-full.csv).
      4. Make a prediction
             `python predict.py` --input '{"age": 35, "job": "technician", "balance": 1500, "loan": "no"}'
 
-    B. Running via Docker
+  B. Running via Docker
       1. Build the Docker image
         `docker build -t term-deposit-predict .`
 
@@ -84,7 +85,29 @@ The project uses the Bank Marketing Dataset (bank-full.csv).
             -d '{"age": 40, "job": "admin", "balance": 2000, "loan": "no"}' \
             http://localhost:9696/predict
 
-      5. Model Development Workflow
+   C. Running on the Cloud (Hugging Face Spaces)
+
+        1. Go to: https://huggingface.co/spaces
+        
+        2. Click Create new Space
+        
+        3. Configure the Space:
+          + SDK: Docker        
+          + Visibility: Public
+        
+        4. Upload or push the following files:        
+          + main.py      
+          + bank-model.bin        
+          + requirements.txt        
+          + Dockerfile
+        
+        Hugging Face automatically builds and deploys the service; no manual server configuration is required.
+    Testing the cloud deployment
+    
+<https://https://roheeme-bank-subscription.hf.space/docs>
+      
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f1c48f2d-a1b1-441b-90d8-1dc959d89228" />
+
 
 All data science steps are documented in notebook.ipynb, including:
 
@@ -96,18 +119,6 @@ All data science steps are documented in notebook.ipynb, including:
 - Selection of the best model
 - Saving the final model and DictVectorizer into bank-model.bin
 
-This ensures the notebook serves as a full methodological record suitable for academic review.
 
-      6. Deployment Architecture
+ 
 
-**The project uses:**
-
-> DictVectorizer for feature encoding
-
-> XGBoost for prediction
-
-> Model serialised using pickle into bank-model.bin
-
-> A lightweight prediction script for input scoring
-
-> Optional Docker container for consistent deployment
