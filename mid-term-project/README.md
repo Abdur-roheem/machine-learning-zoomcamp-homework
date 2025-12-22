@@ -73,6 +73,7 @@ The project uses the Bank Marketing Dataset (bank-full.csv).
             `python predict.py` --input '{"age": 35, "job": "technician", "balance": 1500, "loan": "no"}'
 
   B. Running via Docker
+  
       1. Build the Docker image
         `docker build -t term-deposit-predict .`
 
@@ -121,4 +122,5 @@ All data science steps are documented in notebook.ipynb, including:
 
 
  
+
 
