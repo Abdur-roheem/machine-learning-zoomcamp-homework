@@ -18,9 +18,10 @@ output_file = 'bank-model.bin'
 
 #Data Preparation
 
-df = pd.read_csv("bank-full.csv", sep=";")
+# Load data
+df = pd.read_csv("../data/bank-full.csv", sep=";")
 
-
+# Preprocess data
 categorical = ['job', 'marital', 'education', 'default',  'housing',
                'loan', 'contact', 'month', 'poutcome']
 numerical = ['age', 'balance', 'day', 'duration', 
@@ -57,7 +58,7 @@ X_val = dv.transform(val_dict)
 dtrain = xgb.DMatrix(X_train, label=y_train, feature_names=dv.feature_names_)
 dval = xgb.DMatrix(X_val, label=y_val, feature_names=dv.feature_names_)
 
-
+# Train model
 xgb_params = { 
 'eta': 0.3, 
 'max_depth': 6, 
@@ -72,6 +73,7 @@ xgb_params = {
 print("Fitting model")
 model = xgb.train(xgb_params, dtrain, num_boost_round=15)
 
+# Evaluate model
 y_pred = model.predict(dval)
 score = roc_auc_score(y_val, y_pred)
 print(f"Auc score is {score}")
