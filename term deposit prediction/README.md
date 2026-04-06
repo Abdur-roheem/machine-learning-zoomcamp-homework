@@ -1,126 +1,154 @@
-# **📘 Term Deposit Subscription Prediction**
+# 🚀 Term Deposit Subscription Prediction API  
 
-## **📌 Project Overview**
+## 📌 Overview  
+This project builds and deploys a machine learning model to predict whether a customer will subscribe to a term deposit based on historical marketing data.  
 
-This project builds a machine-learning model to predict whether a bank customer will subscribe to a term deposit. The model is exposed as a REST API using FastAPI and deployed to the cloud using Docker and Hugging Face Spaces.
-
-**The pipeline includes:**
-
-> Data exploration & preprocessing
-
-> Feature engineering
-
-> Model training using Logistic Regression and XGBoost
-
-> Model evaluation using ROC–AUC
-
-> Saving and deploying the final model
-
-> Dockerized prediction service
-
-The dataset is from direct marketing campaigns conducted by a Portuguese banking institution.
-
-The solution is designed to support automated bank marketing decisions, enabling institutions to identify high-probability subscribers and optimise marketing campaigns.
-
-**A complete workflow is included:**
-
-> Data exploration and preprocessing
-
-> Model training using multiple algorithms
-
-> Model selection based on performance metrics (e.g., ROC AUC)
-
-> Exporting the final model into a portable .bin file
-
-> Loading the model for prediction through a Python script
-
-> Optional Docker support for deployment
-
-The project uses the Bank Marketing Dataset (bank-full.csv).
-
-**2. Files in the Repository**
-+  _.python-version_     ~ Python version specification for environment managers
-+ _Dockerfile_           ~ Docker image configuration for deployment
-+ _README.md_            ~ Project documentation (this file)
-+ _bank-full.csv_        ~ Dataset used for training and evaluation
-+ _bank-model.bin_       ~ Serialized DictVectorizer + trained ML model
-+ _notebook.ipynb_       ~ Full workflow: EDA, preprocessing, model testing, saving
-+ _predict.py_           ~ Script to load model.bin and predict for new customer data
-+ _predict_old.py_       ~ Earlier version of prediction script (kept for reference)
-+ _pyproject.toml_       ~ Project dependencies and build configuration
-+ _test.py_              ~ Basic test script to validate model loading/prediction
-+ _train.py_             ~ End-to-end training script for model construction
-+ _uv.lock_              ~ Lock file for deterministic package resolution
-
-**4. How to Run the Project**
-
-  A. Running Locally (Without Docker)
-    
-     1. Clone the repository
-     
-        + git clone https://github.comAbdur-roheem/machine-learning-zoomcamp-homework/edit/main/mid-term-project/prediction.git
-        + cd term-deposit-prediction
-     
-     2. Install dependencies        
-          `uv sync`
-     
-     3. Train the model (optional)
-       
-       - This will regenerate bank-model.bin.
-              `python train.py`
-
-     4. Make a prediction
-            `python predict.py` --input '{"age": 35, "job": "technician", "balance": 1500, "loan": "no"}'
-
-  B. Running via Docker
-  
-      1. Build the Docker image
-        `docker build -t term-deposit-predict .`
-
-      2. Run the container
-          `docker run -p 9696:9696 term-deposit-predict`
-
-      3. Send a prediction request
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -d '{"age": 40, "job": "admin", "balance": 2000, "loan": "no"}' \
-            http://localhost:9696/predict
-
-   C. Running on the Cloud (Hugging Face Spaces)
-
-        1. Go to: https://huggingface.co/spaces
-        
-        2. Click Create new Space
-        
-        3. Configure the Space:
-          + SDK: Docker        
-          + Visibility: Public
-        
-        4. Upload or push the following files:        
-          + main.py      
-          + bank-model.bin        
-          + requirements.txt        
-          + Dockerfile
-        
-        Hugging Face automatically builds and deploys the service; no manual server configuration is required.
-    Testing the cloud deployment
-    
-<https://https://roheeme-bank-subscription.hf.space/docs>
-      
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f1c48f2d-a1b1-441b-90d8-1dc959d89228" />
+It demonstrates an **end-to-end machine learning pipeline** from data exploration and model training to deployment as a REST API—designed to support **data-driven business decision-making**.
 
 
-All data science steps are documented in notebook.ipynb, including:
+## 🎯 Problem Statement  
+Marketing campaigns often target a broad audience, leading to **low conversion rates and wasted resources**.  
 
-- Data collection
-- Exploratory Data Analysis (EDA)
-- Feature preprocessing
-- Training multiple models (Logistic Regression, XGBoost)
-- Comparing performance using ROC AUC
-- Selection of the best model
-- Saving the final model and DictVectorizer into bank-model.bin
+This project aims to:
+- Identify customers most likely to subscribe  
+- Improve targeting efficiency  
+- Reduce operational and marketing costs  
 
 
- 
+## 💡 Solution  
+A classification model was developed using Python and deployed as an API that allows real-time predictions based on customer data.
 
 
+## 🧠 Project Structure  
+```
+term-deposit-prediction/
+│
+├── data/ # Raw and processed datasets
+├── notebooks/ # EDA and experimentation
+│ ├── 01-eda.ipynb
+│ └── 02-modeling.ipynb
+│
+├── src/ # Core ML logic
+│ ├── train.py # Model training pipeline
+│ ├── predict.py # Prediction logic
+│ └── utils.py # Helper functions
+│
+├── model/ # Saved trained model
+│ └── model.pkl
+│
+├── app/ # API layer
+│ └── app.py
+│
+├── requirements.txt # Project dependencies
+├── Dockerfile # Containerization setup
+└── README.md
+```
+
+
+## ⚙️ Tech Stack  
+- **Python**  
+- **pandas, NumPy**  
+- **scikit-learn**  
+- **FastAPI**  
+- **Uvicorn**  
+- **Docker**  
+
+
+## 📊 Model Performance  
+- **ROC-AUC Score:** `0.92`  
+- Demonstrates strong ability to distinguish between subscribing and non-subscribing customers  
+
+
+## 🔍 Approach  
+
+### 1. Data Preparation  
+- Data cleaning and preprocessing  
+- Handling missing values  
+- Feature engineering and encoding  
+
+### 2. Model Development  
+- Trained classification models using `scikit-learn`  
+- Evaluated using ROC-AUC and other metrics  
+- Selected best-performing model  
+
+### 3. Deployment  
+- Model saved using `pickle`  
+- Exposed via REST API using FastAPI  
+- Containerised using Docker for reproducibility  
+
+
+## 🚀 Running the Project  
+
+### 🔹 Option 1: Run Locally  
+
+_#Clone repository_  
+`git clone https://github.com/Abdur-roheem/machine-learning-zoomcamp-homework.git`
+
+_Move into project_  
+`cd machine-learning-zoomcamp-homework/Term\ Subscription\ deposit`
+
+_Create virtual environment_  
+`python -m venv venv`
+
+_Activate environment_  
+`venv\Scripts\activate`        # Windows  
+`source venv/bin/activate`     # Mac/Linux
+
+_Install dependencies_  
+`pip install -r requirements.txt`
+
+_Run API_  
+`uvicorn app.app:app --reload`  
+
+### 🔹 Option 2: Run with Docker
+
+_#Build Docker image_  
+`docker build -t term-deposit-app .`
+
+_#Run container_  
+`docker run -p 9696:9696 term-deposit-app`
+
+
+**👉 API will be available at:**  
+`http://localhost:9696`
+
+
+### 📡 API Usage
+
+### Endpoint
+`POST /predict`
+
+**Example Request**
+```
+{
+  "age": 35,
+  "job": "management",
+  "balance": 5000,
+  "housing": "yes"
+}
+```
+**Example Response**
+```
+{
+  "prediction": 1
+}
+```
+
+## 💼 Business Impact**
+
+This solution can help organizations:
+
+- Improve marketing ROI
+- Increase customer conversion rates
+- Reduce unnecessary outreach efforts
+- Enable data-driven decision-making
+
+🔗 Project Link
+
+👉 https://github.com/Abdur-roheem/machine-learning-zoomcamp-homework/tree/main/Term%20Subscription%20deposit
+
+👤 Author
+
+**Roheem Ogunmakin**
++ Statistics Graduate
++ Data Science & Machine Learning Enthusiast
